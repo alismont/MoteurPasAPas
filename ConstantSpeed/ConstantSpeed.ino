@@ -3,7 +3,9 @@
 #include <AccelStepper.h>
 long pos;
 long pos2;
-
+long DiffPos;
+float cofCorrVit;
+ 
 long csg=0;
 long csg2=0;
 
@@ -44,11 +46,11 @@ csg=1000;
 csg2=1000;
 
   stepper.setAcceleration(40.0);
-   stepper.setMaxSpeed(300.0);
+   stepper.setMaxSpeed(600.0);
    stepper.moveTo(csg);
    
-      stepper2.setAcceleration(40.0);
-   stepper2.setMaxSpeed(300.0*(csg2/csg));
+   stepper2.setAcceleration(40.0);
+   stepper2.setMaxSpeed(600.0);
    stepper2.moveTo(csg2);
    
    st=1;
@@ -60,19 +62,20 @@ if(pos==1000 && st==1)
 csg=0;
 csg2=0;
    stepper.setAcceleration(40.0);
-   stepper.setMaxSpeed(300.0);
+   stepper.setMaxSpeed(600.0);
    stepper.moveTo(csg);
    
-         stepper2.setAcceleration(40.0);
-   stepper2.setMaxSpeed(300.0*1);
+      stepper2.setAcceleration(40.0);
+   stepper2.setMaxSpeed(600.0);
    stepper2.moveTo(csg2);
 
    st=0;
 
 }
 
-
-
+DiffPos=(600*(stepper2.currentPosition())/(stepper.currentPosition()));
+cofCorrVit=(600)*0.2;
+stepper2.setMaxSpeed(cofCorrVit);
 
 
 
